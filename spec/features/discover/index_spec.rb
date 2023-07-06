@@ -44,7 +44,11 @@ RSpec.describe 'Discover Movies Page', type: :feature do
   describe "Discover Movies Page" do 
     it 'displays the page title' do 
       visit "/users/#{@user_1.id}/discover"
+      expect(page).to have_content('Discover Movies')
+    end 
 
+    it 'has button to discover top rated movies' do 
+      visit "/users/#{@user_1.id}/discover"
       expect(page).to have_button("Discover Top Rated Movies")
 
       within "#top-movies" do 
@@ -53,5 +57,7 @@ RSpec.describe 'Discover Movies Page', type: :feature do
         expect(current_path).to eq("/users/#{@user_1.id}/movies")
       end
     end
+
+
   end
 end
