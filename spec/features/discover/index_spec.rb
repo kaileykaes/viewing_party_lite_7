@@ -21,7 +21,7 @@ RSpec.describe 'Discover Movies Page', type: :feature do
       .to_return(status: 200, body: '{"results": []}')
 
     no_response = File.read('spec/fixtures/no_response.json')
-    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIE_DB_KEY']}&query=blahblahblah")
+    stub_request(:get, "https://api.themoviedb.org/3/search/movie?api_key=#{ENV['MOVIE_DB_KEY']}&query=JoeDirt")
       .to_return(status: 404, body: no_response)
   end
 
@@ -56,6 +56,41 @@ RSpec.describe 'Discover Movies Page', type: :feature do
 
         expect(current_path).to eq("/users/#{@user_1.id}/movies")
       end
+    end
+
+    it 'can work to find movies with valid title input' do 
+      visit "/users/#{@user_1.id}/discover"
+
+      within '#search-movies' do 
+        fill_in :search, with: 'Godfather'
+        click_button('Find Movie')
+        expect(current_path).to eq("/users/#{@user_1.id}/movies")
+      end
+    end
+
+    #sad path
+    it 'has a search field that redirects back to itself if no input exists' do 
+      visit "/users/#{@user_1.id}/discover"
+
+      within '#search-movies' do 
+        fill_in :search, with: ''
+        click_button('Find Movie')
+        expect(current_path).to eq("/users/#{@user_1.id}/discover")
+      end
+
+      expect(page).to have_content ("No Results Found")
+    end
+
+    it 'has a search field that redirects back to itself if input is not found' do 
+      visit "/users/#{@user_1.id}/discover"
+
+      within '#search-movies' do 
+        fill_in :search, with: 'JoeDirt'
+        click_button('Find Movie')
+        expect(current_path).to eq("/users/#{@user_1.id}/discover")
+      end
+
+      expect(page).to have_content ("No Results Found")
     end
 
 
