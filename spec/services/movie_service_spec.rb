@@ -11,5 +11,10 @@ RSpec.describe MovieService do
     top_movies = MovieService.top_rated_movies
 
     expect(top_movies).to be_a(Hash)
+    expect(top_movies[:results].count).to eq(20)
+    expect(top_movies[:results][0][:title]).to eq("The Godfather")
+    expect(top_movies[:results][0][:vote_average]).to eq(8.7)
+    expect(top_movies[:results][19][:title]).to eq("Seven Samurai")
+    expect(top_movies[:results][19][:vote_average]).to eq(8.5)
   end
 end
