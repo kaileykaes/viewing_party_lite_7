@@ -1,20 +1,20 @@
 class Movie 
   attr_reader :title,
               :id,
-              :summary,
+              :overview,
               :vote_average,
               :vote_count,
-              :image_url,
+              :poster_path,
               :runtime, 
               :genres
 
   def initialize(response)
     @title = response[:title]
     @id = response[:id]
-    @summary = response[:summary]
+    @overview = response[:overview]
     @vote_average = response[:vote_average]
     @vote_count = response[:vote_count]
-    @image_url = response[:image_url]
+    @poster_path = response[:poster_path]
     @runtime = response[:runtime]
     @genres = response[:genres]
   end
