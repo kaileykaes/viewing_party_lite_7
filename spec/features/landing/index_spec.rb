@@ -23,10 +23,10 @@ RSpec.describe 'landing page' do
   end
 
   it "displays existing users with links to users dashboard" do 
-    expect(page).to have_link(@user_1.name)
-    expect(page).to have_link(@user_2.name)
+    expect(page).to have_link(@user_1.email)
+    expect(page).to have_link(@user_2.email)
 
-    click_link(@user_1.name)
+    click_link(@user_1.email)
     expect(current_path).to eq("/users/#{@user_1.id}")
   end
 

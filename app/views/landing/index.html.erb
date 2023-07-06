@@ -2,7 +2,7 @@
 
 <ul class="user-list">
   <% @users.each do |user| %>
-    <%= link_to "#{user.name}", "/users/#{user.id}" %>
+    <%= link_to "#{user.email}", "/users/#{user.id}" %>
   <% end %>
 </ul>
 
