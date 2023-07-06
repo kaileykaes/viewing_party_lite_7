@@ -2,3 +2,10 @@
 <div id="top-movies">
   <%= button_to "Discover Top Rated Movies", "/users/#{@user.id}/movies", params: {q: 'top_rated'}, method: :get%>
 </div>
+
+<div id="search-movies">
+  <%= form_tag("/users/#{@user.id}/movies", method: :get) do %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag ("Find Movie") %>
+  <% end %>
+</div>
