@@ -48,7 +48,7 @@ RSpec.describe 'Discover Movies Page', type: :feature do
       expect(page).to have_button("Discover Top Rated Movies")
 
       within "#top-movies" do 
-        click_button "Discover Top Rated Moives"
+        click_button "Discover Top Rated Movies"
 
         expect(current_path).to eq("/users/#{@user_1.id}/movies")
       end
