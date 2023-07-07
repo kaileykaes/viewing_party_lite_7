@@ -62,7 +62,7 @@ group :development, :test do
   gem "factory_bot_rails"
   gem "faker"
   gem "figaro"
-  gem "vcr"
+
 end
 
 group :development do
@@ -84,4 +84,5 @@ group :test do
 #   gem "simplecov"
 #   gem "shoulda-matchers"
     gem "webmock"
+    gem "vcr"
 end
