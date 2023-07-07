@@ -26,6 +26,11 @@ RSpec.describe 'movie results page' do
     within("#top-rated-20") do
       expect(page).to have_content("8.5")
     end
+  end
 
+  it "has a button to nav back to discover page" do 
+    expect(page).to have_button("Return to Discover")
+    click_button "Return to Discover Page"
+    expect(current_path).to eq("/users/#{@user_1.id}/discover")
   end
 end
