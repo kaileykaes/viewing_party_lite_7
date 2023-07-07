@@ -1,0 +1,10 @@
+
+<h1>Top Rated Movies</h1>
+  <% if @top_movies %>
+    <% @top_movies.each.with_index(1) do |film, index| %>
+      <li id="top-rated-<%= index %>"%>
+        <%= link_to "#{film.title}", "/users/#{@user.id}/movies/#{film.id}" %>
+        <%= film.vote_average %>
+      </li>
+      <% end %>
+  <% end %>
