@@ -92,7 +92,5 @@ RSpec.describe 'Discover Movies Page', type: :feature do
 
       expect(page).to have_content ("No Results Found")
     end
-
-
   end
 end
