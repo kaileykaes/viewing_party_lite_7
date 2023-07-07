@@ -1,0 +1,24 @@
+<%= button_to "Return to Discover Page", "/users/#{@user.id}/discover", method: :get %>
+<%= button_to "Create Viewing Party", "/users/#{@user.id}/viewingparty/new", method: :get %>
+
+
+<h2>Title: <%= @movie.title %></h2>
+<p>Vote Average: <%= @movie.vote_average %></p>
+<p>Run Time: <%= @movie.runtime %></p>
+<p>Summary: <%= @movie.overview %></p>
+<p>Genres: <% @movie.genres.each do |genre| %>
+  <%= genre[:name] %>
+<% end %></p>
+
+<h3>Cast</h3>
+  <% @actors.each do |actor| %>
+    <p>Actor: <%= actor.name %></p>
+    <p>Character: <%= actor.character %></p>
+  <% end %>
+
+ <h3>Reviews</h3>
+  <% @review.each do |review| %>
+    <p>Author: <%= review.author %></p>
+    <p><%= review.content %></p>
+    <p>Rating: <%= review.rating %></p>
+  <% end %>

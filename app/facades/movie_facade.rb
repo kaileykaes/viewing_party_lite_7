@@ -15,4 +15,16 @@ class MovieFacade
       Movie.new(movie)
     end
   end
+
+  def self.top_cast(id)
+    MovieService.get_cast(id)[:cast][0..9].map do |data|
+      Actor.new(data)
+    end
+  end
+
+  def self.get_reviews(id)
+    MovieService.get_reviews(id)[:results].map do |data|
+      Review.new(data)
+    end
+  end
 end
