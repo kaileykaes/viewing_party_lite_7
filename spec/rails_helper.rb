@@ -71,3 +71,11 @@ RSpec.configure do |config|
     end
   end
 end
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+  config.hook_into :webmock
+  config.filter_sensitive_data('<MOVIE_DB_KEY>') {ENV["MOVIE_DB_KEY"]}
+  config.allow_http_connections_when_no_cassette = true
+
+end
