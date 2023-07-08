@@ -1,6 +1,7 @@
-class LandingController < ApplicationController
+# frozen_string_literal: true
 
-  def index 
-    @users = User.all 
+class LandingController < ApplicationController
+  def index
+    @users = User.all
   end
 end

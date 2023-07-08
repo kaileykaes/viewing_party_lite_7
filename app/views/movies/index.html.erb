@@ -1,0 +1,10 @@
+<%= button_to 'Discover Page', user_discover_index_path(@user), method: :get %>
+
+<div class="movies">
+  <% @movies.each do |movie| %>
+    <div class="movie">
+      <div class="title"><%= link_to (movie.title), ("/users/#{@user.id}/movies/#{movie.id}")%></div>
+      <div class="vote-average"><%= movie.vote_average %></div>
+    </div>
+  <% end %>
+</div>
