@@ -12,7 +12,6 @@ RSpec.describe 'movie results page' do
 
   it "displays title as a link to movie details page" do 
     VCR.use_cassette("top_rated_movies") do 
-
       expect(page).to have_link("The Godfather")
       expect(page).to have_link("Seven Samurai")
     end
