@@ -13,7 +13,7 @@ class ViewingPartiesController < ApplicationController
 
     if @party.save 
       
-      ViewingPartyUsers.create(user_id: @party.user_id, viewing_party_id: @party.id)
+      # ViewingPartyUsers.create(user_id: @party.user_id, viewing_party_id: @party.id)
       redirect_to (user_path(@host))
 
       #for sad path have error message if duration is shorter than runtime
