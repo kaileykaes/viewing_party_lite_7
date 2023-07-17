@@ -40,6 +40,7 @@ RSpec.describe 'movies results page' do
       fill_in(:movie_search, with: 'neverending')
       click_button 'Find Movies'
       expect(page).to have_css('.movies')
+
       within '.movies' do
         expect(page).to have_css('.movie', maximum: 20)
       end
