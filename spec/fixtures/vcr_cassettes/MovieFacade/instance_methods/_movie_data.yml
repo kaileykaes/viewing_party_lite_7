@@ -7,6 +7,8 @@ http_interactions:
       encoding: US-ASCII
       string: ''
     headers:
+      Authorization:
+      - "<TMDB_AUTH>"
       User-Agent:
       - Faraday v2.7.10
       Accept-Encoding:
@@ -15,38 +17,57 @@ http_interactions:
       - "*/*"
   response:
     status:
-      code: 401
-      message: Unauthorized
+      code: 200
+      message: OK
     headers:
       Content-Type:
-      - application/json; charset=utf-8
+      - application/json;charset=utf-8
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
       Date:
-      - Sat, 08 Jul 2023 19:12:30 GMT
+      - Mon, 17 Jul 2023 18:38:03 GMT
       Server:
       - openresty
       Cache-Control:
-      - public, max-age=300
+      - public, max-age=24767
+      X-Memc:
+      - HIT
+      X-Memc-Key:
+      - 9d48db5c244b9c3e3d162ef155211175
+      X-Memc-Age:
+      - '22329'
+      X-Memc-Expires:
+      - '2627'
+      Etag:
+      - W/"6f5559c014c249fba689b6b4c66d8e9f"
+      Vary:
+      - Accept-Encoding
+      - Origin
       X-Cache:
-      - Error from cloudfront
+      - Hit from cloudfront
       Via:
-      - 1.1 33c81f2d1329ae561e4982ed7fc464d4.cloudfront.net (CloudFront)
+      - 1.1 51c49bddeb40b2d8ef4e452891b72e60.cloudfront.net (CloudFront)
       X-Amz-Cf-Pop:
       - DFW57-P2
       Alt-Svc:
       - h3=":443"; ma=86400
       X-Amz-Cf-Id:
-      - VurpQlhDGN_NGTaS30dGMa2FUfTyiiUoOrd2eQr-1bm730JivFFQcQ==
-      Vary:
-      - Origin
+      - 4hNPoy_GPdsdwqQVGxAVxllNgJ7AspIlw8KhVM6D0kFexSXBxz_MIg==
+      Age:
+      - '1841'
     body:
-      encoding: UTF-8
-      string: '{"status_code":7,"status_message":"Invalid API key: You must be granted
-        a valid key.","success":false}
-
-        '
-  recorded_at: Sat, 08 Jul 2023 19:12:30 GMT
+      encoding: ASCII-8BIT
+      string: '{"adult":false,"backdrop_path":"/tmU7GeKVybMWFButWEGl2M4GeiP.jpg","belongs_to_collection":{"id":230,"name":"The
+        Godfather Collection","poster_path":"/e5iVtjkjM30znn86JsvkBYtvEo1.jpg","backdrop_path":"/3WZTxpgscsmoUk81TuECXdFOD0R.jpg"},"budget":6000000,"genres":[{"id":18,"name":"Drama"},{"id":80,"name":"Crime"}],"homepage":"http://www.thegodfather.com/","id":238,"imdb_id":"tt0068646","original_language":"en","original_title":"The
+        Godfather","overview":"Spanning the years 1945 to 1955, a chronicle of the
+        fictional Italian-American Corleone crime family. When organized crime family
+        patriarch, Vito Corleone barely survives an attempt on his life, his youngest
+        son, Michael steps in to take care of the would-be killers, launching a campaign
+        of bloody revenge.","popularity":157.026,"poster_path":"/3bhkrj58Vtu7enYsRolD1fZdja1.jpg","production_companies":[{"id":4,"logo_path":"/gz66EfNoYPqHTYI4q9UEN4CbHRc.png","name":"Paramount","origin_country":"US"},{"id":10211,"logo_path":null,"name":"Alfran
+        Productions","origin_country":"US"}],"production_countries":[{"iso_3166_1":"US","name":"United
+        States of America"}],"release_date":"1972-03-14","revenue":245066411,"runtime":175,"spoken_languages":[{"english_name":"English","iso_639_1":"en","name":"English"},{"english_name":"Italian","iso_639_1":"it","name":"Italiano"},{"english_name":"Latin","iso_639_1":"la","name":"Latin"}],"status":"Released","tagline":"An
+        offer you can''t refuse.","title":"The Godfather","video":false,"vote_average":8.71,"vote_count":18237}'
+  recorded_at: Mon, 17 Jul 2023 19:08:44 GMT
 recorded_with: VCR 6.2.0

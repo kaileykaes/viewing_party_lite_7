@@ -33,6 +33,7 @@ RSpec.describe MovieFacade do
     
     it '#top_rated' do 
       movies = @mf.top_movies
+
       expect(movies).to be_a Array
       expect(movies.first).to be_a Movie
       expect(movies.count).to eq(20)
