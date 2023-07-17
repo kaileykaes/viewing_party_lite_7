@@ -20,7 +20,6 @@ RSpec.describe MovieService do
 
     it '#get_url', :vcr do 
       response = @ms.get_url('movie/top_rated')
-      require 'pry'; binding.pry
       expect(response).to be_a Hash
       expect(response[:results]).to be_a Array
 
