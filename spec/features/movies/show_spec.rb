@@ -20,7 +20,7 @@ RSpec.describe 'Movie Detail Page', type: :feature do
 
     it 'displays runtime' do 
       expect(page).to have_content("Run Time:")
-      expect(page).to have_content(@movie.runtime)
+      expect(page).to have_content(@movie.format_runtime)
     end
     
     it 'displays genres' do

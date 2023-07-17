@@ -1,6 +1,6 @@
 <h1><%= @movie.title %></h1>
 <h3>Vote Average: </h3><%= @movie.vote_average %>
-<h3>Run Time: </h3><%= @movie.runtime %>
+<h3>Run Time: </h3><%= @movie.format_runtime %>
 <h3>Genres: </h3>
   <% @movie.genres.each do |genre| %>
     <%= genre %>

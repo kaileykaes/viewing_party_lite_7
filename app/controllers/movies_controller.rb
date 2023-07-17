@@ -2,8 +2,6 @@ class MoviesController < ApplicationController
   before_action :find_user, :create_facade
 
   def index
-    # @facade = MovieFacade.new(params[:movie_search])
-
     if @facade.search != nil
       @movies = @facade.search_movies
     else
