@@ -38,7 +38,9 @@ RSpec.describe 'landing page' do
 
   describe 'Logging In Happy Path' do 
     it 'has a link for Log In' do 
-      expect(page).to have_link('Log In', href: '/login')
+      expect(page).to have_button('Log In')
+      click_button "Log In"
+      expect(current_path).to eq(login_path)
     end
   end
 end
