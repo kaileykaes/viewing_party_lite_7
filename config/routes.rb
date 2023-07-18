@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/register', to: 'users#new', as: 'register'
 
   get '/login', to: 'users#login_form', as: 'login'
+  post '/login', to: 'users#login', as: 'user_login'
     
   resources :users, only: [:create, :show] do
     resources :discover, only: [:index]
