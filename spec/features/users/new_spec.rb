@@ -6,7 +6,7 @@ RSpec.describe '/register', type: :feature do
       visit register_path
     end
 
-    describe 'registration' do 
+    describe 'registration happy path' do 
       it 'form to register has a descriptive header' do
         expect(page).to have_content('Register a New User')
       end
@@ -30,59 +30,61 @@ RSpec.describe '/register', type: :feature do
       end
     end
     
-    it 'missing name field' do 
-      fill_in('Email:', with: 'jjjs@gmail.com')
-      fill_in('Password:', with: 'test')
-      fill_in('Password Confirmation:', with: 'test')
-      click_button 'Register'
+    describe 'registration sad paths' do 
+      it 'missing name field' do 
+        fill_in('Email:', with: 'jjjs@gmail.com')
+        fill_in('Password:', with: 'test')
+        fill_in('Password Confirmation:', with: 'test')
+        click_button 'Register'
+        
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Name can't be blank")
+      end
       
-      expect(current_path).to eq(register_path)
-      expect(page).to have_content("Name can't be blank")
-    end
-    
-    it 'missing email field' do 
-      fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
-      fill_in('Password:', with: 'test')
-      fill_in('Password Confirmation:', with: 'test')
-      click_button 'Register'
+      it 'missing email field' do 
+        fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
+        fill_in('Password:', with: 'test')
+        fill_in('Password Confirmation:', with: 'test')
+        click_button 'Register'
+        
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Email can't be blank")
+      end
       
-      expect(current_path).to eq(register_path)
-      expect(page).to have_content("Email can't be blank")
-    end
+      it 'missing password field' do 
+        fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
+        fill_in('Email:', with: 'jjjs@gmail.com')
+        fill_in('Password Confirmation:', with: 'test')
+        click_button 'Register'
     
-    it 'missing password field' do 
-      fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
-      fill_in('Email:', with: 'jjjs@gmail.com')
-      fill_in('Password Confirmation:', with: 'test')
-      click_button 'Register'
-  
-      expect(current_path).to eq(register_path)
-      expect(page).to have_content("Password can't be blank")
-      expect(page).to have_content("Password confirmation doesn't match Password")
-    end
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Password can't be blank")
+        expect(page).to have_content("Password confirmation doesn't match Password")
+      end
 
-    it 'if email validation fails, try again' do
-      user1 = create(:user)
-      fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
-      fill_in('Email:', with: user1.email)
-      fill_in('Password:', with: 'test')
-      fill_in('Password Confirmation:', with: 'test')
-      click_button 'Register'
+      it 'if email validation fails, try again' do
+        user1 = create(:user)
+        fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
+        fill_in('Email:', with: user1.email)
+        fill_in('Password:', with: 'test')
+        fill_in('Password Confirmation:', with: 'test')
+        click_button 'Register'
 
-      expect(current_path).to eq(register_path)
-      expect(page).to have_content('Email has already been taken')
-    end
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content('Email has already been taken')
+      end
 
 
-    it 'cannot register with bad credentials' do 
-      fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
-      fill_in('Email:', with: 'jjjs@gmail.com')
-      fill_in('Password:', with: 'test')
-      fill_in('Password Confirmation:', with: 'chest')
-      click_button 'Register'
-  
-      expect(current_path).to eq(register_path)
-      expect(page).to have_content("Password confirmation doesn't match Password")
+      it 'cannot register with bad credentials' do 
+        fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
+        fill_in('Email:', with: 'jjjs@gmail.com')
+        fill_in('Password:', with: 'test')
+        fill_in('Password Confirmation:', with: 'chest')
+        click_button 'Register'
+    
+        expect(current_path).to eq(register_path)
+        expect(page).to have_content("Password confirmation doesn't match Password")
+      end
     end
   end
 end
