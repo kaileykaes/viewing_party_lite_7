@@ -16,10 +16,16 @@ class UsersController < ApplicationController
     end
   end
 
-  def login_form
+  def login_form; end
 
+  def login
+    user = User.find_by(email: params[:email])
+    if user.authenticate(params[:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user)
+    end
   end
-  
+
   private
 
   def user_params
