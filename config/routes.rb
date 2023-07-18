@@ -9,14 +9,13 @@ Rails.application.routes.draw do
   root 'landing#index'
 
   get '/register', to: 'users#new', as: 'register'
-  get '/users/:user_id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new', as: 'new_viewing_party'
-  
-  # post '/users/:user_id/movies/:movie_id/viewing_parties', to: 'viewing_parties#create'
-  
+
+  get '/login', to: 'users#login_form', as: 'login'
+    
   resources :users, only: [:create, :show] do
     resources :discover, only: [:index]
     resources :movies, only: [:index, :show]
-    resources :viewing_parties, only: [:create]
+    resources :viewing_parties, only: [:new, :create]
   end
 
   get '/register', to: 'users#new'
