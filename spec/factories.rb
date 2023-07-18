@@ -17,5 +17,6 @@ FactoryBot.define do
 
   factory :viewing_party_user do
     :viewing_party
+    :user
   end
 end

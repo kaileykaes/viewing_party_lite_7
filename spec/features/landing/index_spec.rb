@@ -4,14 +4,14 @@ require 'rails_helper'
 
 RSpec.describe 'landing page' do
   before :each do
-    @user_1 = User.create!(name: 'Kevdog', email: 'BigKev@gmail.com', password: 'pass112')
-    @user_2 = User.create!(name: 'Shpoinkle', email: 'Shpoink@gmail.com', password: 'passgfga')
+    @user_1 = create(:user)
+    @user_2 = create(:user)
 
-    @party_1 = ViewingParty.create!(duration: 120, date: '05-03-2024', time: '03:00:00', movie_id: 1)
-    @party_2 = ViewingParty.create!(duration: 140, date: '05-02-2024', time: '05:00:00', movie_id: 2)
+    @party_1 = create(:viewing_party)
+    @party_2 = create(:viewing_party)
 
-    @viewing_party_user_1 = ViewingPartyUser.create!(user_id: @user_1.id, viewing_party_id: @party_1.id)
-    @viewing_party_user_2 = ViewingPartyUser.create!(user_id: @user_2.id, viewing_party_id: @party_2.id)
+    @viewing_party_user_1 = create(:viewing_party_user, viewing_party: @party_1, user: @user_1)
+    @viewing_party_user_1 = create(:viewing_party_user, viewing_party: @party_1, user: @user_2)
 
     visit '/'
   end
@@ -29,7 +29,7 @@ RSpec.describe 'landing page' do
     expect(page).to have_link(@user_2.name)
 
     click_link(@user_1.name)
-    expect(current_path).to eq("/users/#{@user_1.id}")
+    expect(current_path).to eq(user_path(@user_1.id))
   end
 
   it 'displays link to return to landing page' do

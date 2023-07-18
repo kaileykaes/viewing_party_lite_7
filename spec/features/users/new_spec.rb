@@ -29,7 +29,7 @@ RSpec.describe '/register', type: :feature do
         # expect(page).to have_content('John Jacob Jingleheimer Schmidt')
       end
     end
-    
+
     describe 'registration sad paths' do 
       it 'missing name field' do 
         fill_in('Email:', with: 'jjjs@gmail.com')
@@ -88,4 +88,3 @@ RSpec.describe '/register', type: :feature do
     end
   end
 end
-# sad path: field isn't filled in
