@@ -4,7 +4,17 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.create(user_params)
+    @user = User.new(user_params)
+
+    if @user.valid?
+      @user.save
+      redirect_to(user_path(@user))
+    else
+      error_message = @user.errors.full_messages
+      flash[:error] = error_message
+      require 'pry'; binding.pry
+      redirect_to register_path
+    end
   end
 
   private
