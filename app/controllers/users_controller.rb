@@ -23,6 +23,9 @@ class UsersController < ApplicationController
     if user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to user_path(user)
+    else 
+      flash[:error] = "Your credentials were wrong. Try again."
+      render :login_form
     end
   end
 
