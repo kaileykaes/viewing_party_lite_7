@@ -42,6 +42,16 @@ RSpec.describe '/register', type: :feature do
       expect(page).to have_content('Email has already been taken')
     end
 
+    it 'missing name field' do 
+      fill_in('Email:', with: 'jjjs@gmail.com')
+      fill_in('Password:', with: 'test')
+      fill_in('Password Confirmation:', with: 'test')
+      click_button 'Register'
+  
+      expect(current_path).to eq(register_path)
+      expect(page).to have_content("Password confirmation doesn't match Password")
+    end
+
     it 'cannot register with bad credentials' do 
       fill_in('Name:', with: 'John Jacob Jingleheimer Schmidt')
       fill_in('Email:', with: 'jjjs@gmail.com')
@@ -50,8 +60,7 @@ RSpec.describe '/register', type: :feature do
       click_button 'Register'
   
       expect(current_path).to eq(register_path)
-      require 'pry'; binding.pry
-      expect(page).to have_content('Sorry, your credentials are bad.')
+      expect(page).to have_content("Password confirmation doesn't match Password")
     end
   end
 end
