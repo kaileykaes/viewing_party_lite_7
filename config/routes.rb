@@ -12,8 +12,8 @@ Rails.application.routes.draw do
 
   get '/users/:user_id/movies/:movie_id/viewing-party/new', to: 'viewing_parties#new', as: 'new_viewing_party'
   
-  get '/login', to: 'users#login_form', as: 'login'
-  post '/login', to: 'users#login', as: 'user_login'
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create', as: 'user_login'
 
   resources :users, only: [:create, :show] do
     resources :discover, only: [:index]
@@ -21,5 +21,5 @@ Rails.application.routes.draw do
     resources :viewing_parties, only: [:create]
   end
 
-  get '/register', to: 'users#new'
+  resources :sessions, only: [:destroy]
 end
