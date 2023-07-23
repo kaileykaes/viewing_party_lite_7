@@ -5,18 +5,13 @@ RSpec.describe 'landing page' do
     @user_1 = create(:user)
     @user_2 = create(:user)
 
-    visit login_path
-    fill_in :email, with: @user_1.email
-    fill_in :password, with: @user_1.password
-    click_button 'Log In'
-
     @party_1 = create(:viewing_party)
     @party_2 = create(:viewing_party)
 
     @viewing_party_user_1 = create(:viewing_party_user, viewing_party: @party_1, user: @user_1)
     @viewing_party_user_1 = create(:viewing_party_user, viewing_party: @party_1, user: @user_2)
 
-    visit '/'
+    visit root_path
   end
 
   describe 'page details' do 
@@ -24,13 +19,28 @@ RSpec.describe 'landing page' do
       expect(page).to have_content('Viewing Party')
     end
 
-    it 'has button to create new user' do
+    it 'has button to create new user if no user logged in' do
       expect(page).to have_button('Create New User')
     end
 
+    it 'has no button to create new user if user logged in' do
+      visit login_path
+      fill_in :email, with: @user_1.email
+      fill_in :password, with: @user_1.password
+      click_button 'Log In'
+      expect(page).to_not have_button('Create New User')
+    end
+
     it 'displays existing users with links to users dashboard' do
+      visit login_path
+      fill_in :email, with: @user_1.email
+      fill_in :password, with: @user_1.password
+      click_button 'Log In'
+
+      visit root_path
       expect(page).to have_link(@user_1.name)
       expect(page).to have_link(@user_2.name)
+
 
       click_link(@user_1.name)
       expect(current_path).to eq(user_path(@user_1.id))
