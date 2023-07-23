@@ -1,7 +1,7 @@
 class ViewingPartiesController < ApplicationController
   def new
     @party = ViewingParty.new 
-    @host = User.find(params[:user_id])
+    @host = User.find(session[:user_id])
     @facade = MovieFacade.new(params[:movie_id])
     @movie = @facade.movie(params[:movie_id])
     @users = User.where.not(id: @host.id)
@@ -9,7 +9,7 @@ class ViewingPartiesController < ApplicationController
 
   def create 
     @party = ViewingParty.new(party_params)
-    @host = User.find(params[:user_id])
+    @host = User.find(session[:user_id])
 
     if @party.save 
       

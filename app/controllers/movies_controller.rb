@@ -20,7 +20,7 @@ class MoviesController < ApplicationController
   private
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find(session[:user_id])
   end
 
   def create_facade
