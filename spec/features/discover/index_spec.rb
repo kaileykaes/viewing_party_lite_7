@@ -4,7 +4,12 @@ RSpec.describe 'Discover Movies Page', type: :feature do
   before(:each) do
     @user_1 = create(:user)
     @user_2 = create(:user)
-    visit user_path(@user_1)
+
+    visit '/login'
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_button 'Log In'
+
   end
 
   describe 'Discover Movies Button' do
@@ -23,21 +28,22 @@ RSpec.describe 'Discover Movies Page', type: :feature do
 
   describe 'button to discover top rated movies' do
     it 'has button' do
-      visit user_discover_index_path(@user_2)
+      visit user_discover_index_path(@user_1)
       expect(page).to have_button('Discover Top Rated Movies')
     end
 
     it 'button has path' do
-      visit user_discover_index_path(@user_2)
+      visit user_discover_index_path(@user_1)
       click_on 'Discover Top Rated Movies'
-      expect(current_path).to eq(user_movies_path(@user_2))
+      expect(current_path).to eq(user_movies_path(@user_1))
     end
   end
 
   describe 'search field for movies' do
     before(:each) do
-      visit user_discover_index_path(@user_2)
+      visit user_discover_index_path(@user_1)
     end
+
     it 'has a search field' do
       expect(page).to have_field(:movie_search)
     end
@@ -49,7 +55,7 @@ RSpec.describe 'Discover Movies Page', type: :feature do
     it 'movie search by title' do
       fill_in :movie_search, with: 'Neverending'
       click_button 'Find Movies'
-      expect(current_path).to eq(user_movies_path(@user_2))
+      expect(current_path).to eq(user_movies_path(@user_1))
     end
   end
 end
