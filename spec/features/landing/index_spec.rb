@@ -5,6 +5,11 @@ RSpec.describe 'landing page' do
     @user_1 = create(:user)
     @user_2 = create(:user)
 
+    visit login_path
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_button 'Log In'
+
     @party_1 = create(:viewing_party)
     @party_2 = create(:viewing_party)
 

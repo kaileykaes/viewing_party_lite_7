@@ -5,6 +5,10 @@ require 'rails_helper'
 RSpec.describe 'movies results page' do
   before(:each) do
     @user_1 = create(:user)
+    visit login_path
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_button 'Log In'
   end
 
   describe 'visiting movies results page' do

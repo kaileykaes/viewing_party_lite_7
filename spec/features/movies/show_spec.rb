@@ -5,6 +5,11 @@ RSpec.describe 'Movie Detail Page', type: :feature do
     @user_1 = create(:user)
     @movie = MovieFacade.new.movie(238)
 
+    visit login_path
+    fill_in :email, with: @user_1.email
+    fill_in :password, with: @user_1.password
+    click_button 'Log In'
+
     visit user_movie_path(@user_1, @movie.id) 
   end
 
