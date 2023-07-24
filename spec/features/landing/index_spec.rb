@@ -38,6 +38,7 @@ RSpec.describe 'landing page' do
       click_button 'Log In'
 
       visit root_path
+      expect(page).to have_content('Existing Users:')
       expect(page).to have_link(@user_1.name)
       expect(page).to have_link(@user_2.name)
 
@@ -56,6 +57,14 @@ RSpec.describe 'landing page' do
       expect(page).to have_button('Log In')
       click_button "Log In"
       expect(current_path).to eq(login_path)
+    end
+  end
+
+  describe 'Authorization' do 
+    it 'visitor does not see existing users' do 
+      visit root_path
+
+      expect(page).to_not have_content("Existing Users") 
     end
   end
 end
