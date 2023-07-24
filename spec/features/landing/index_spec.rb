@@ -62,9 +62,22 @@ RSpec.describe 'landing page' do
 
   describe 'Authorization' do 
     it 'visitor does not see existing users' do 
+      expect(page).to_not have_content("Existing Users") 
+    end
+
+    it 'registered user can see existing users' do 
+      visit login_path
+      fill_in :email, with: @user_1.email
+      fill_in :password, with: @user_1.password
+      click_button 'Log In'
+
       visit root_path
 
-      expect(page).to_not have_content("Existing Users") 
+      expect(page).to have_content("Existing Users")
+      within ".user-list" do 
+        expect(page).to have_content(@user_1.name)
+        expect(page).to have_content(@user_2.name)
+      end
     end
   end
 end

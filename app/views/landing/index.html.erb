@@ -8,9 +8,11 @@
   <%= button_to "Create New User", register_path %>
 <% end %>
 
-<h3>Existing Users:</h3>
-<ul class="user-list">
-  <% @users.each do |user| %>
-    <%= link_to "#{user.name}", "/users/#{user.id}" %>
-  <% end %>
-</ul>
+<% if session[:user_id] %>
+  <h3>Existing Users:</h3>
+  <ul class="user-list">
+    <% @users.each do |user| %>
+      <%= link_to "#{user.name}", "/users/#{user.id}" %>
+    <% end %>
+  </ul>
+<% end %>
