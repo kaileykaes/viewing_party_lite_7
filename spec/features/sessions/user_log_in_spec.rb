@@ -45,7 +45,7 @@ RSpec.describe 'Log In', type: :feature do
     before(:each) do 
       visit login_path
       fill_in :email, with: @user_1.email
-      fill_in :password, with: @user_1.password
+      fill_in :password, with: @user_1.password  
       click_button 'Log In'
     end
 
