@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_user, only: :show
+
   def show
     @user = User.find(session[:user_id])
   end
@@ -21,5 +23,12 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:name, :email, :password, :password_confirmation, :id)
+  end
+
+  def require_user
+    if !session[:user_id]
+      flash[:alert] = 'Must be registered and logged in to view.'
+      redirect_to root_path
+    end
   end
 end
