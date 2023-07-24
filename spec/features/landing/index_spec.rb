@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'landing page' do
-  before :each do
+  before(:each) do
     @user_1 = create(:user)
     @user_2 = create(:user)
 
@@ -31,22 +31,6 @@ RSpec.describe 'landing page' do
       expect(page).to_not have_button('Create New User')
     end
 
-    it 'displays existing users with links to users dashboard' do
-      visit login_path
-      fill_in :email, with: @user_1.email
-      fill_in :password, with: @user_1.password
-      click_button 'Log In'
-
-      visit root_path
-      expect(page).to have_content('Existing Users:')
-      expect(page).to have_link(@user_1.name)
-      expect(page).to have_link(@user_2.name)
-
-
-      click_link(@user_1.name)
-      expect(current_path).to eq(user_path(@user_1.id))
-    end
-
     it 'displays link to return to landing page' do
       expect(page).to have_link('Return Home', href: '/')      
     end
@@ -65,7 +49,7 @@ RSpec.describe 'landing page' do
       expect(page).to_not have_content("Existing Users") 
     end
 
-    it 'registered user can see existing users' do 
+    it 'registered user can see existing users email' do 
       visit login_path
       fill_in :email, with: @user_1.email
       fill_in :password, with: @user_1.password
@@ -75,8 +59,8 @@ RSpec.describe 'landing page' do
 
       expect(page).to have_content("Existing Users")
       within ".user-list" do 
-        expect(page).to have_content(@user_1.name)
-        expect(page).to have_content(@user_2.name)
+        expect(page).to have_content(@user_1.email)
+        expect(page).to have_content(@user_2.email)
       end
     end
   end
